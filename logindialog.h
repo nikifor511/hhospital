@@ -2,6 +2,8 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
+#include "db_adapter.h"
+#include "registryform.h"
 
 namespace Ui {
 class LoginDialog;
@@ -17,6 +19,8 @@ public:
 
 private slots:
     void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::LoginDialog *ui;

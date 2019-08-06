@@ -28,16 +28,19 @@ SOURCES += \
         db_adapter.cpp \
         logindialog.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        registryform.cpp
 
 HEADERS += \
         db_adapter.h \
         logindialog.h \
-        mainwindow.h
+        mainwindow.h \
+        registryform.h
 
 FORMS += \
         logindialog.ui \
-        mainwindow.ui
+        mainwindow.ui \
+        registryform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
