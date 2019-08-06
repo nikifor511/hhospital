@@ -22,9 +22,10 @@ void LoginDialog::on_pushButton_2_clicked()
 
 void LoginDialog::on_pushButton_clicked()
 {
+    QMessageBox msgBox;
     if ((ui->loginLineEdit->text() == "") || (ui->passLineEdit->text() == ""))
     {
-        QMessageBox msgBox;
+
         msgBox.setText("Fill in all the fields!");
         msgBox.exec();
     }
@@ -37,18 +38,24 @@ void LoginDialog::on_pushButton_clicked()
     res.next();
     switch (res.value(0).toInt()) {
         case 1:
+        {
             RegistryForm *registry_frm = new RegistryForm;
             registry_frm->setWindowModality(Qt::WindowModal);
             registry_frm->show();
             this->close();
             break;
+        }
 
 //        case 2:
 //            break;
 //        case 3:
 //            break;
-//        default:
-//            break;
+        default:
+        {
+            msgBox.setText("Check your login/password");
+            msgBox.exec();
+            break;
+        }
 
     }
 }

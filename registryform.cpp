@@ -9,61 +9,69 @@ RegistryForm::RegistryForm(QWidget *parent) :
     ui(new Ui::RegistryForm)
 {
     ui->setupUi(this);
-
-    QStandardItemModel *model = new QStandardItemModel;
-    QStandardItem *item;
-
-    QStringList horizontalHeader;
-        horizontalHeader.append("Первый");
-        horizontalHeader.append("Второй");
-        horizontalHeader.append("Третий");
-        horizontalHeader.append("Четвертый");
-
-        //Заголовки строк
-        QStringList verticalHeader;
-        verticalHeader.append("Ряд 1");
-        verticalHeader.append("Ряд 2");
-
-        model->setHorizontalHeaderLabels(horizontalHeader);
-        model->setVerticalHeaderLabels(verticalHeader);
-
-        //Первый ряд
-        item = new QStandardItem(QString("0"));
-        model->setItem(0, 0, item);
-
-        item = new QStandardItem(QString("1"));
-        model->setItem(0, 1, item);
-
-        item = new QStandardItem(QString("2"));
-        model->setItem(0, 2, item);
-
-        item = new QStandardItem(QString("3"));
-        model->setItem(0, 3, item);
-
-        //Второй ряд
-        item = new QStandardItem(QString("4"));
-        model->setItem(1, 0, item);
-
-        item = new QStandardItem(QString("5"));
-        model->setItem(1, 1, item);
-
-        item = new QStandardItem(QString("6"));
-        model->setItem(1, 2, item);
-
-        item = new QStandardItem(QString("7"));
-        model->setItem(1, 3, item);
-
-        ui->tableView->setModel(model);
-
-        ui->tableView->resizeRowsToContents();
-        ui->tableView->resizeColumnsToContents();
-
-
-
-
 }
 
 RegistryForm::~RegistryForm()
 {
     delete ui;
+}
+
+void RegistryForm::on_pushButton_clicked()
+{
+    QString fio_str = ui->searchPatientLineEdit->text().replace(QRegExp("[ ]{2,}")," ");
+    fio_str.remove(QRegExp("\\s+$"));
+    qDebug() << fio_str;
+    QStringList FIO = fio_str.split(" ");
+    foreach (QString n, FIO)
+        qDebug() << n;
+    QString sql_str;
+    switch (FIO.length()) {
+        case 2:
+        {
+            sql_str = "select * from patients where \"Surname\" = '" + FIO[0] + "' and \"Name\" = '" + FIO[1] + "'";
+            qDebug() << sql_str;
+            break;
+        }
+        case 3:
+        {
+            sql_str = sql_str = "select * from patients where \"Surname\" = '" + FIO[0] + "' and \"Name\" = '" + FIO[1] + "' and \"Patronymic\" = '" + FIO[2] + "'";
+            qDebug() << sql_str;
+            break;
+        }
+        default:
+        {
+            sql_str = "select * from patients where \"Surname\" = '" + FIO[0] + "'";
+            qDebug() << sql_str;
+            break;
+        }
+    }
+    QSqlQuery res = DB_Adapter::query(sql_str);
+
+    QStandardItemModel *model = new QStandardItemModel;
+    QStandardItem *item;
+
+    QStringList horizontalHeader;
+    int i;
+
+    QSqlRecord localRecord = res.record();
+    for (i=0; i<localRecord.count(); ++i)
+    {
+        QString fieldName = localRecord.fieldName(i);
+        qDebug() << fieldName;
+        horizontalHeader.append(fieldName);
+    }
+    model->setHorizontalHeaderLabels(horizontalHeader);
+    int curent_row = 0;
+    while (res.next())
+    {
+        for (i=0; i<localRecord.count(); ++i)
+        {
+           item = new QStandardItem(QString(res.value(i).toString()));
+           model->setItem(curent_row, i,item);
+        }
+        curent_row++;
+    }
+    ui->tableView->setModel(model);
+    ui->tableView->resizeRowsToContents();
+    ui->tableView->resizeColumnsToContents();
 }
