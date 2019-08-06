@@ -11,7 +11,7 @@ class DB_Adapter
 {
 public:
     DB_Adapter();
-    static void query(QString query_str);
+    static QSqlQuery query(QString query_str);
 };
 
 #endif // DB_ADAPTER_H

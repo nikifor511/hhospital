@@ -26,17 +26,17 @@ CONFIG += c++11
 
 SOURCES += \
         db_adapter.cpp \
-        loginform.cpp \
+        logindialog.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
         db_adapter.h \
-        loginform.h \
+        logindialog.h \
         mainwindow.h
 
 FORMS += \
-        loginform.ui \
+        logindialog.ui \
         mainwindow.ui
 
 # Default rules for deployment.

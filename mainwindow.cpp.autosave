@@ -6,11 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QSqlQuery q = DB_Adapter::query("select * from patients");
-    while (q.next())
-    {
-        qDebug() << q.value(1).toString() << "/n";
-    }
+//    QSqlQuery q = DB_Adapter::query("select * from patients");
+//    while (q.next())
+//    {
+//        qDebug() << q.value(1).toString() << "/n";
+//    }
 }
 
 MainWindow::~MainWindow()
