@@ -26,18 +26,21 @@ CONFIG += c++11
 
 SOURCES += \
         db_adapter.cpp \
-        loginform.cpp \
+        logindialog.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        registryform.cpp
 
 HEADERS += \
         db_adapter.h \
-        loginform.h \
-        mainwindow.h
+        logindialog.h \
+        mainwindow.h \
+        registryform.h
 
 FORMS += \
-        loginform.ui \
-        mainwindow.ui
+        logindialog.ui \
+        mainwindow.ui \
+        registryform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

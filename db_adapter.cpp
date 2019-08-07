@@ -5,7 +5,7 @@ DB_Adapter::DB_Adapter()
 
 }
 
-void DB_Adapter::query(QString query_str)
+QSqlQuery DB_Adapter::query(QString query_str)
 {
     QSqlDatabase my_db = QSqlDatabase::addDatabase("QPSQL");
     my_db.setHostName("ec2-54-247-189-1.eu-west-1.compute.amazonaws.com");
@@ -18,9 +18,8 @@ void DB_Adapter::query(QString query_str)
           qDebug() << query_str;
        }
     QSqlQuery sql_query(query_str);
-    while (sql_query.next())
-    {
-        qDebug() << sql_query.value(1).toString() << "/n";
-    }
+
     my_db.close();
+    return sql_query;
+
 }
