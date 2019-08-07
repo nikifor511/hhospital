@@ -29,17 +29,20 @@ SOURCES += \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
+        makeanappointmentdialog.cpp \
         registryform.cpp
 
 HEADERS += \
         db_adapter.h \
         logindialog.h \
         mainwindow.h \
+        makeanappointmentdialog.h \
         registryform.h
 
 FORMS += \
         logindialog.ui \
         mainwindow.ui \
+        makeanappointmentdialog.ui \
         registryform.ui
 
 # Default rules for deployment.

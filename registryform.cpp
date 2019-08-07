@@ -4,6 +4,8 @@
 #include "QStandardItemModel"
 #include "QStandardItem"
 
+#include <QMessageBox>
+
 RegistryForm::RegistryForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RegistryForm)
@@ -74,4 +76,18 @@ void RegistryForm::on_pushButton_clicked()
     ui->tableView->setModel(model);
     ui->tableView->resizeRowsToContents();
     ui->tableView->resizeColumnsToContents();
+}
+
+void RegistryForm::on_pushButton_4_clicked()
+{
+    if (ui->tableView->currentIndex().row() == -1)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Choose the patient");
+        msgBox.exec();
+        return;
+    }
+    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
+    make_an_appointment_dlg->exec();
 }

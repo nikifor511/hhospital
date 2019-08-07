@@ -25,9 +25,9 @@ void LoginDialog::on_pushButton_clicked()
     QMessageBox msgBox;
     if ((ui->loginLineEdit->text() == "") || (ui->passLineEdit->text() == ""))
     {
-
         msgBox.setText("Fill in all the fields!");
         msgBox.exec();
+        return;
     }
 
 
