@@ -22,6 +22,9 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLineEdit" name="IDPatientLineEdit">
    <property name="geometry">
@@ -32,8 +35,11 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="IDDoctorLineEdit">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -41,6 +47,9 @@
      <width>113</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QComboBox" name="FIODoctorComboBox">
@@ -73,7 +82,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="OpenDiseasePushButton">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -86,7 +95,7 @@
     <string>Open Disease</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="CancelPushButton">
    <property name="geometry">
     <rect>
      <x>490</x>

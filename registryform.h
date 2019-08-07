@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "db_adapter.h"
 #include "makeanappointmentdialog.h"
+#include "opendiseasedialog.h"
 
 namespace Ui {
 class RegistryForm;
@@ -21,6 +22,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::RegistryForm *ui;

@@ -91,3 +91,17 @@ void RegistryForm::on_pushButton_4_clicked()
     MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
     make_an_appointment_dlg->exec();
 }
+
+void RegistryForm::on_pushButton_5_clicked()
+{
+    if (ui->tableView->currentIndex().row() == -1)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Choose the patient");
+        msgBox.exec();
+        return;
+    }
+    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    OpenDiseaseDialog *open_disease_dlg = new OpenDiseaseDialog(nullptr, id_patient);
+    open_disease_dlg->exec();
+}
