@@ -19,11 +19,14 @@ public:
     ~RegistryForm();
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_SearchPatientPushButton_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_AddPatientPushButton_clicked();
+
+    void on_OpenDiseasePushButton_clicked();
+
+    void on_AddVisitPushButton_clicked();
 
 private:
     Ui::RegistryForm *ui;

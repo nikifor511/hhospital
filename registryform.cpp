@@ -18,7 +18,9 @@ RegistryForm::~RegistryForm()
     delete ui;
 }
 
-void RegistryForm::on_pushButton_clicked()
+
+
+void RegistryForm::on_SearchPatientPushButton_clicked()
 {
     QString fio_str = ui->searchPatientLineEdit->text().replace(QRegExp("[ ]{2,}")," ");
     fio_str.remove(QRegExp("\\s+$"));
@@ -78,21 +80,12 @@ void RegistryForm::on_pushButton_clicked()
     ui->tableView->resizeColumnsToContents();
 }
 
-void RegistryForm::on_pushButton_4_clicked()
+void RegistryForm::on_AddPatientPushButton_clicked()
 {
-    if (ui->tableView->currentIndex().row() == -1)
-    {
-        QMessageBox msgBox;
-        msgBox.setText("Choose the patient");
-        msgBox.exec();
-        return;
-    }
-    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
-    MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
-    make_an_appointment_dlg->exec();
+
 }
 
-void RegistryForm::on_pushButton_5_clicked()
+void RegistryForm::on_OpenDiseasePushButton_clicked()
 {
     if (ui->tableView->currentIndex().row() == -1)
     {
@@ -104,4 +97,18 @@ void RegistryForm::on_pushButton_5_clicked()
     int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     OpenDiseaseDialog *open_disease_dlg = new OpenDiseaseDialog(nullptr, id_patient);
     open_disease_dlg->exec();
+}
+
+void RegistryForm::on_AddVisitPushButton_clicked()
+{
+    if (ui->tableView->currentIndex().row() == -1)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Choose the patient");
+        msgBox.exec();
+        return;
+    }
+    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
+    make_an_appointment_dlg->exec();
 }
