@@ -11,6 +11,7 @@ RegistryForm::RegistryForm(QWidget *parent) :
     ui(new Ui::RegistryForm)
 {
     ui->setupUi(this);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 RegistryForm::~RegistryForm()
@@ -111,4 +112,12 @@ void RegistryForm::on_AddVisitPushButton_clicked()
     int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
     make_an_appointment_dlg->exec();
+}
+
+void RegistryForm::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    qDebug() << "Double click";
+    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    //qDebug() << index.row() << " " << index.column() << " " << index.data().toString();
+    qDebug() << id_patient;
 }
