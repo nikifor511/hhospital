@@ -11,7 +11,7 @@ RegistryForm::RegistryForm(QWidget *parent) :
     ui(new Ui::RegistryForm)
 {
     ui->setupUi(this);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->PatientsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 RegistryForm::~RegistryForm()
@@ -76,9 +76,9 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
         }
         curent_row++;
     }
-    ui->tableView->setModel(model);
-    ui->tableView->resizeRowsToContents();
-    ui->tableView->resizeColumnsToContents();
+    ui->PatientsTableView->setModel(model);
+    ui->PatientsTableView->resizeRowsToContents();
+    ui->PatientsTableView->resizeColumnsToContents();
 }
 
 void RegistryForm::on_AddPatientPushButton_clicked()
@@ -88,28 +88,28 @@ void RegistryForm::on_AddPatientPushButton_clicked()
 
 void RegistryForm::on_OpenDiseasePushButton_clicked()
 {
-    if (ui->tableView->currentIndex().row() == -1)
+    if (ui->PatientsTableView->currentIndex().row() == -1)
     {
         QMessageBox msgBox;
         msgBox.setText("Choose the patient");
         msgBox.exec();
         return;
     }
-    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     OpenDiseaseDialog *open_disease_dlg = new OpenDiseaseDialog(nullptr, id_patient);
     open_disease_dlg->exec();
 }
 
 void RegistryForm::on_AddVisitPushButton_clicked()
 {
-    if (ui->tableView->currentIndex().row() == -1)
+    if (ui->PatientsTableView->currentIndex().row() == -1)
     {
         QMessageBox msgBox;
         msgBox.setText("Choose the patient");
         msgBox.exec();
         return;
     }
-    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
     make_an_appointment_dlg->exec();
 }
@@ -117,7 +117,14 @@ void RegistryForm::on_AddVisitPushButton_clicked()
 void RegistryForm::on_tableView_doubleClicked(const QModelIndex &index)
 {
     qDebug() << "Double click";
-    int id_patient = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     //qDebug() << index.row() << " " << index.column() << " " << index.data().toString();
     qDebug() << id_patient;
+    ui->tabWidget->setCurrentIndex(1);
+    QWidget* pWidget= ui->tabWidget->widget(1);
+    QLineEdit *id_line_edit = pWidget->findChild(QLineEdit, "IDPatientLineEdit")
+
+
+
+
 }
