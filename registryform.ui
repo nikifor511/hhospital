@@ -148,7 +148,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="FIOPatientLineEdit_2">
+    <widget class="QLineEdit" name="FIOPatientLineEdit">
      <property name="geometry">
       <rect>
        <x>140</x>

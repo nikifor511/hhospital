@@ -1,9 +1,5 @@
 #include "registryform.h"
 #include "ui_registryform.h"
-
-#include "QStandardItemModel"
-#include "QStandardItem"
-
 #include <QMessageBox>
 
 RegistryForm::RegistryForm(QWidget *parent) :
@@ -12,14 +8,13 @@ RegistryForm::RegistryForm(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->PatientsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->DiseasesTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tabWidget->setCurrentIndex(0);
 }
 
-RegistryForm::~RegistryForm()
-{
+RegistryForm::~RegistryForm(){
     delete ui;
 }
-
-
 
 void RegistryForm::on_SearchPatientPushButton_clicked()
 {
@@ -50,33 +45,7 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
             break;
         }
     }
-    QSqlQuery res = DB_Adapter::query(sql_str);
-
-    QStandardItemModel *model = new QStandardItemModel;
-    QStandardItem *item;
-
-    QStringList horizontalHeader;
-    int i;
-
-    QSqlRecord localRecord = res.record();
-    for (i=0; i<localRecord.count(); ++i)
-    {
-        QString fieldName = localRecord.fieldName(i);
-        qDebug() << fieldName;
-        horizontalHeader.append(fieldName);
-    }
-    model->setHorizontalHeaderLabels(horizontalHeader);
-    int curent_row = 0;
-    while (res.next())
-    {
-        for (i=0; i<localRecord.count(); ++i)
-        {
-           item = new QStandardItem(QString(res.value(i).toString()));
-           model->setItem(curent_row, i,item);
-        }
-        curent_row++;
-    }
-    ui->PatientsTableView->setModel(model);
+    ui->PatientsTableView->setModel(Make_Model::fill(sql_str));
     ui->PatientsTableView->resizeRowsToContents();
     ui->PatientsTableView->resizeColumnsToContents();
 }
@@ -114,17 +83,21 @@ void RegistryForm::on_AddVisitPushButton_clicked()
     make_an_appointment_dlg->exec();
 }
 
-void RegistryForm::on_tableView_doubleClicked(const QModelIndex &index)
+void RegistryForm::on_PatientsTableView_doubleClicked(const QModelIndex &index)
 {
     qDebug() << "Double click";
     int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
-    //qDebug() << index.row() << " " << index.column() << " " << index.data().toString();
     qDebug() << id_patient;
+
     ui->tabWidget->setCurrentIndex(1);
-    QWidget* pWidget= ui->tabWidget->widget(1);
-    QLineEdit *id_line_edit = pWidget->findChild(QLineEdit, "IDPatientLineEdit")
+    ui->IDPatientLineEdit->setText(QString::number(id_patient));
+    QString sql_str = "select \"Surname\", \"Name\", \"Patronymic\" from patients where \"ID\" = " + QString::number(id_patient);
+    QSqlQuery res = DB_Adapter::query(sql_str);
+    res.next();
+    ui->FIOPatientLineEdit->setText(res.value(0).toString() + " " + res.value(1).toString() + " " + res.value(2).toString());
 
-
-
-
+    sql_str = "select * from diseases where \"PatientID\" = " + QString::number(id_patient);
+    ui->DiseasesTableView->setModel(Make_Model::fill(sql_str));
+    ui->DiseasesTableView->resizeRowsToContents();
+    ui->DiseasesTableView->resizeColumnsToContents();
 }

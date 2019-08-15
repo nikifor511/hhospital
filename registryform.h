@@ -5,6 +5,7 @@
 #include "db_adapter.h"
 #include "makeanappointmentdialog.h"
 #include "opendiseasedialog.h"
+#include "make_model.h"
 
 namespace Ui {
 class RegistryForm;
@@ -28,7 +29,7 @@ private slots:
 
     void on_AddVisitPushButton_clicked();
 
-    void on_tableView_doubleClicked(const QModelIndex &index);
+    void on_PatientsTableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::RegistryForm *ui;
