@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>723</width>
-    <height>526</height>
+    <height>519</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,43 +26,7 @@
     <string>Registry</string>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>130</y>
-     <width>701</width>
-     <height>351</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="searchPatientLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>591</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Пупкин</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>50</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Search Patient</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="AddPatientPushButton">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -75,7 +39,7 @@
     <string>Add Patient...</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="LogOutPushButton">
    <property name="geometry">
     <rect>
      <x>630</x>
@@ -88,7 +52,7 @@
     <string>Log Out</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="AddVisitPushButton">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -101,7 +65,7 @@
     <string>Add Visit...</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="OpenDiseasePushButton">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -112,6 +76,133 @@
    </property>
    <property name="text">
     <string>Open Disease...</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="RegistryTableView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>701</width>
+     <height>251</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="IDPatientLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>113</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="searchPatientLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>611</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Пупкин</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SearchPatientPushButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>90</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search Patient</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="FIOPatientLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>571</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BackPushButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>190</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="TableNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>190</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>d</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="DescriptionDiseaseLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>160</y>
+     <width>451</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="IDDiseaseLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>160</y>
+     <width>113</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="BeginDateEdit">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>160</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

@@ -18,8 +18,6 @@ QSqlQuery DB_Adapter::query(QString query_str)
           qDebug() << query_str;
        }
     QSqlQuery sql_query(query_str);
-
     my_db.close();
     return sql_query;
-
 }
