@@ -29,10 +29,12 @@ private slots:
 
     void on_AddVisitPushButton_clicked();
 
-    void on_PatientsTableView_doubleClicked(const QModelIndex &index);
+    void on_RegistryTableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::RegistryForm *ui;
+    int table_index;
+
 };
 
 #endif // REGISTRYFORM_H

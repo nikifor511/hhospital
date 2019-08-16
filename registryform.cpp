@@ -2,14 +2,15 @@
 #include "ui_registryform.h"
 #include <QMessageBox>
 
+
 RegistryForm::RegistryForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RegistryForm)
 {
     ui->setupUi(this);
-    ui->PatientsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->DiseasesTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tabWidget->setCurrentIndex(0);
+    ui->RegistryTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableNameLabel->setText("Patients");
+    table_index = 0;
 }
 
 RegistryForm::~RegistryForm(){
@@ -45,9 +46,10 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
             break;
         }
     }
-    ui->PatientsTableView->setModel(Make_Model::fill(sql_str));
-    ui->PatientsTableView->resizeRowsToContents();
-    ui->PatientsTableView->resizeColumnsToContents();
+    table_index = 0;
+    ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
+    ui->RegistryTableView->resizeRowsToContents();
+    ui->RegistryTableView->resizeColumnsToContents();
 }
 
 void RegistryForm::on_AddPatientPushButton_clicked()
@@ -57,47 +59,75 @@ void RegistryForm::on_AddPatientPushButton_clicked()
 
 void RegistryForm::on_OpenDiseasePushButton_clicked()
 {
-    if (ui->PatientsTableView->currentIndex().row() == -1)
+    if (ui->RegistryTableView->currentIndex().row() == -1)
     {
         QMessageBox msgBox;
         msgBox.setText("Choose the patient");
         msgBox.exec();
         return;
     }
-    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    int id_patient = ui->RegistryTableView->model()->data(ui->RegistryTableView->model()->index(ui->RegistryTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     OpenDiseaseDialog *open_disease_dlg = new OpenDiseaseDialog(nullptr, id_patient);
     open_disease_dlg->exec();
 }
 
 void RegistryForm::on_AddVisitPushButton_clicked()
 {
-    if (ui->PatientsTableView->currentIndex().row() == -1)
+    if (ui->RegistryTableView->currentIndex().row() == -1)
     {
         QMessageBox msgBox;
         msgBox.setText("Choose the patient");
         msgBox.exec();
         return;
     }
-    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    int id_patient = ui->RegistryTableView->model()->data(ui->RegistryTableView->model()->index(ui->RegistryTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     MakeAnAppointmentDialog *make_an_appointment_dlg = new MakeAnAppointmentDialog(nullptr, id_patient);
     make_an_appointment_dlg->exec();
 }
 
-void RegistryForm::on_PatientsTableView_doubleClicked(const QModelIndex &index)
+void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
 {
-    qDebug() << "Double click";
-    int id_patient = ui->PatientsTableView->model()->data(ui->PatientsTableView->model()->index(ui->PatientsTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
-    qDebug() << id_patient;
+    int id_value = ui->RegistryTableView->model()->data(ui->RegistryTableView->model()->index(ui->RegistryTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    QString sql_str;
+    QSqlQuery res;
 
-    ui->tabWidget->setCurrentIndex(1);
-    ui->IDPatientLineEdit->setText(QString::number(id_patient));
-    QString sql_str = "select \"Surname\", \"Name\", \"Patronymic\" from patients where \"ID\" = " + QString::number(id_patient);
-    QSqlQuery res = DB_Adapter::query(sql_str);
-    res.next();
-    ui->FIOPatientLineEdit->setText(res.value(0).toString() + " " + res.value(1).toString() + " " + res.value(2).toString());
+    switch (table_index)
+    {
+        case (0):
+            ui->IDPatientLineEdit->setText(QString::number(id_value));
+            sql_str = "select \"Surname\", \"Name\", \"Patronymic\" from patients where \"ID\" = " + QString::number(id_value);
+            res = DB_Adapter::query(sql_str);
+            res.next();
+            ui->FIOPatientLineEdit->setText(res.value(0).toString() + " " + res.value(1).toString() + " " + res.value(2).toString());
+            sql_str = "select * from diseases where \"PatientID\" = " + QString::number(id_value);
+            ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
+            ui->RegistryTableView->resizeRowsToContents();
+            ui->RegistryTableView->resizeColumnsToContents();
+            table_index = 1;
+            ui->TableNameLabel->setText("Diseases");
+            break;
 
-    sql_str = "select * from diseases where \"PatientID\" = " + QString::number(id_patient);
-    ui->DiseasesTableView->setModel(Make_Model::fill(sql_str));
-    ui->DiseasesTableView->resizeRowsToContents();
-    ui->DiseasesTableView->resizeColumnsToContents();
+        case (1):
+            ui->IDDiseaseLineEdit->setText(QString::number(id_value));
+            sql_str = "select \"DateBegin\", \"Description\" from diseases where \"ID\" = " + QString::number(id_value);
+            res = DB_Adapter::query(sql_str);
+            res.next();
+            ui->DescriptionDiseaseLineEdit->setText(res.value(0).toString());
+            ui->BeginDateEdit->setDate(res.value(1).toDate());
+            sql_str = "select * from visits where \"DiseaseID\" = " + QString::number(id_value);
+            ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
+            ui->RegistryTableView->resizeRowsToContents();
+            ui->RegistryTableView->resizeColumnsToContents();
+            table_index = 2;
+            ui->TableNameLabel->setText("Visits");
+            break;
+    }
+
+    int u =9;
+    u++;
+
+
+
+
+
 }
