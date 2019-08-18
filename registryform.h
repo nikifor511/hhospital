@@ -2,6 +2,7 @@
 #define REGISTRYFORM_H
 
 #include <QWidget>
+#include <QStandardItemModel>
 #include "db_adapter.h"
 #include "makeanappointmentdialog.h"
 #include "opendiseasedialog.h"
@@ -29,11 +30,14 @@ private slots:
 
     void on_AddVisitPushButton_clicked();
 
-    void on_RegistryTableView_doubleClicked(const QModelIndex &index);
+    void on_RegistryTableView_doubleClicked(const QModelIndex &index, const bool isBack);
+
+    void on_BackPushButton_clicked();
 
 private:
     Ui::RegistryForm *ui;
     int table_index;
+    int tmp_id_patients, tmp_id_diseases;
 
 };
 

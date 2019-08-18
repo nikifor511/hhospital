@@ -35,7 +35,7 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
         }
         case 3:
         {
-            sql_str = sql_str = "select * from patients where \"Surname\" = '" + FIO[0] + "' and \"Name\" = '" + FIO[1] + "' and \"Patronymic\" = '" + FIO[2] + "'";
+            sql_str = "select * from patients where \"Surname\" = '" + FIO[0] + "' and \"Name\" = '" + FIO[1] + "' and \"Patronymic\" = '" + FIO[2] + "'";
             qDebug() << sql_str;
             break;
         }
@@ -46,7 +46,9 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
             break;
         }
     }
+    tmp_str_patients = sql_str;
     table_index = 0;
+    ui->TableNameLabel->setText("Patients");
     ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
     ui->RegistryTableView->resizeRowsToContents();
     ui->RegistryTableView->resizeColumnsToContents();
@@ -85,7 +87,7 @@ void RegistryForm::on_AddVisitPushButton_clicked()
     make_an_appointment_dlg->exec();
 }
 
-void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
+void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index, const bool isBack)
 {
     int id_value = ui->RegistryTableView->model()->data(ui->RegistryTableView->model()->index(ui->RegistryTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
     QString sql_str;
@@ -95,6 +97,7 @@ void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
     {
         case (0):
             ui->IDPatientLineEdit->setText(QString::number(id_value));
+            tmp_id_patients = id_value;
             sql_str = "select \"Surname\", \"Name\", \"Patronymic\" from patients where \"ID\" = " + QString::number(id_value);
             res = DB_Adapter::query(sql_str);
             res.next();
@@ -109,12 +112,14 @@ void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
 
         case (1):
             ui->IDDiseaseLineEdit->setText(QString::number(id_value));
+            tmp_id_diseases = id_value;
             sql_str = "select \"DateBegin\", \"Description\" from diseases where \"ID\" = " + QString::number(id_value);
             res = DB_Adapter::query(sql_str);
             res.next();
             ui->DescriptionDiseaseLineEdit->setText(res.value(1).toString());
             ui->BeginDateEdit->setDate(res.value(0).toDate());
             sql_str = "select * from visits where \"DiseaseID\" = " + QString::number(id_value);
+
             ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
             ui->RegistryTableView->resizeRowsToContents();
             ui->RegistryTableView->resizeColumnsToContents();
@@ -122,12 +127,16 @@ void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
             ui->TableNameLabel->setText("Visits");
             break;
     }
-
     int u =9;
     u++;
+}
 
-
-
-
-
+void RegistryForm::on_BackPushButton_clicked()
+{
+//    if (table_index != 0)
+//        table_index = table_index - 1;
+//    switch (table_index)
+//    {
+//        case (0):
+//    }
 }
