@@ -112,8 +112,8 @@ void RegistryForm::on_RegistryTableView_doubleClicked(const QModelIndex &index)
             sql_str = "select \"DateBegin\", \"Description\" from diseases where \"ID\" = " + QString::number(id_value);
             res = DB_Adapter::query(sql_str);
             res.next();
-            ui->DescriptionDiseaseLineEdit->setText(res.value(0).toString());
-            ui->BeginDateEdit->setDate(res.value(1).toDate());
+            ui->DescriptionDiseaseLineEdit->setText(res.value(1).toString());
+            ui->BeginDateEdit->setDate(res.value(0).toDate());
             sql_str = "select * from visits where \"DiseaseID\" = " + QString::number(id_value);
             ui->RegistryTableView->setModel(Make_Model::fill(sql_str));
             ui->RegistryTableView->resizeRowsToContents();
