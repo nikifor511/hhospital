@@ -30,14 +30,14 @@ private slots:
 
     void on_AddVisitPushButton_clicked();
 
-    void on_RegistryTableView_doubleClicked(const QModelIndex &index, const bool isBack);
+    void on_RegistryTableView_doubleClicked(const QModelIndex &index);
 
     void on_BackPushButton_clicked();
 
 private:
     Ui::RegistryForm *ui;
     int table_index;
-    int tmp_id_patients, tmp_id_diseases;
+    QString tmp_str_patients, tmp_str_diseases;
 
 };
 
