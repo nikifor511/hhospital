@@ -29,6 +29,7 @@ SOURCES += \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
+        make_model.cpp \
         makeanappointmentdialog.cpp \
         opendiseasedialog.cpp \
         registryform.cpp
@@ -37,6 +38,7 @@ HEADERS += \
         db_adapter.h \
         logindialog.h \
         mainwindow.h \
+        make_model.h \
         makeanappointmentdialog.h \
         opendiseasedialog.h \
         registryform.h
