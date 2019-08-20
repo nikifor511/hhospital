@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        addpatientdialog.cpp \
         db_adapter.cpp \
         logindialog.cpp \
         main.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
         registryform.cpp
 
 HEADERS += \
+        addpatientdialog.h \
         db_adapter.h \
         logindialog.h \
         mainwindow.h \
@@ -44,6 +46,7 @@ HEADERS += \
         registryform.h
 
 FORMS += \
+        addpatientdialog.ui \
         logindialog.ui \
         mainwindow.ui \
         makeanappointmentdialog.ui \
