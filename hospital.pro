@@ -25,8 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        addpatientdialog.cpp \
         db_adapter.cpp \
+        editdpatientdialog.cpp \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -36,8 +36,8 @@ SOURCES += \
         registryform.cpp
 
 HEADERS += \
-        addpatientdialog.h \
         db_adapter.h \
+        editpatientdialog.h \
         logindialog.h \
         mainwindow.h \
         make_model.h \
@@ -46,7 +46,7 @@ HEADERS += \
         registryform.h
 
 FORMS += \
-        addpatientdialog.ui \
+        editpatientdialog.ui \
         logindialog.ui \
         mainwindow.ui \
         makeanappointmentdialog.ui \

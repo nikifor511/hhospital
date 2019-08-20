@@ -56,7 +56,7 @@ void RegistryForm::on_SearchPatientPushButton_clicked()
 
 void RegistryForm::on_AddPatientPushButton_clicked()
 {
-    AddPatientDialog *add_patient_dialog = new AddPatientDialog(nullptr);
+    EditPatientDialog *add_patient_dialog = new EditPatientDialog(nullptr);
     add_patient_dialog->exec();
 }
 

@@ -6,7 +6,7 @@
 #include "db_adapter.h"
 #include "makeanappointmentdialog.h"
 #include "opendiseasedialog.h"
-#include "addpatientdialog.h"
+#include "editpatientdialog.h"
 #include "make_model.h"
 
 namespace Ui {
