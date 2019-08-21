@@ -26,7 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         db_adapter.cpp \
-        editdpatientdialog.cpp \
+        editpatientdialog.cpp \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \

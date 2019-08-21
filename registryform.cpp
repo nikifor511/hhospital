@@ -161,3 +161,17 @@ void RegistryForm::on_BackPushButton_clicked()
     }
     qDebug() << "onBackPushButton";
 }
+
+void RegistryForm::on_EditPatientPushButton_clicked()
+{
+    if (table_index != 0 ||  ui->RegistryTableView->currentIndex().row() == -1)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Choose the patient");
+        msgBox.exec();
+        return;
+    }
+    int id_patient = ui->RegistryTableView->model()->data(ui->RegistryTableView->model()->index(ui->RegistryTableView->currentIndex().row(), 0, QModelIndex()), Qt::DisplayRole).toInt();
+    EditPatientDialog *edit_patient_dialog = new EditPatientDialog(nullptr, id_patient);
+    edit_patient_dialog->exec();
+}

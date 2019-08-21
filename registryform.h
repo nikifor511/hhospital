@@ -35,6 +35,8 @@ private slots:
 
     void on_BackPushButton_clicked();
 
+    void on_EditPatientPushButton_clicked();
+
 private:
     Ui::RegistryForm *ui;
     int table_index;
