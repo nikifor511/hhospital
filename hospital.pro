@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         db_adapter.cpp \
         editpatientdialog.cpp \
+        ftp_adapter.cpp \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 HEADERS += \
         db_adapter.h \
         editpatientdialog.h \
+        ftp_adapter.h \
         logindialog.h \
         mainwindow.h \
         make_model.h \
