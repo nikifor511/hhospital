@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include "db_adapter.h"
+#include "ftp_adapter.h"
 
 namespace Ui {
 class EditPatientDialog;
@@ -28,6 +29,8 @@ private slots:
 
     void uploadFinished(QNetworkReply *reply);  // Upload finish slot
     void uploadProgress(qint64 bytesSent, qint64 bytesTotal);  // Upload progress slot
+
+    void on_pushButton_clicked();
 
 private:
     Ui::EditPatientDialog *ui;

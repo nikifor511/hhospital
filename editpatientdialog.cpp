@@ -20,8 +20,6 @@ EditPatientDialog::EditPatientDialog(QWidget *parent,  int id_patient) :
 
     this->id_patient = id_patient;
 
-
-
     if (this->id_patient != 0)
     {
         QString sql_str = "select \"Surname\", \"Name\", \"Patronymic\", \"Birthday\", \"Address\", \"Gender\", \"InsurancePolicy\" from patients where \"ID\" = " +  QString::number(this->id_patient);
@@ -42,7 +40,12 @@ EditPatientDialog::EditPatientDialog(QWidget *parent,  int id_patient) :
         url.setUserName("enikifor");    // Set login
         url.setPassword("student511"); // Set пароль
         url.setPort(21);             // Protocol port, which we will work on
-        QNetworkReply *reply = m_manager->get(QNetworkRequest(url));
+
+         QFile file("c:\\r157\\image.jpg");
+
+         FTP_Adapter::GetFile("ftp://enikifor:student511@nikifor.ucoz.net/img/3_photo.jpg", "c:/r157/image.jpg");
+
+
     }
 }
 
@@ -105,4 +108,12 @@ void EditPatientDialog::uploadProgress(qint64 bytesSent, qint64 bytesTotal)
 {
     // Display the progress of the upload
     ui->progressBar->setValue(100 * bytesSent/bytesTotal);
+}
+
+void EditPatientDialog::on_pushButton_clicked()
+{
+    m_fileName = QFileDialog::getOpenFileName(this, "Get Any File");
+    ui->FilePathLabel->setText(m_fileName);
+    FTP_Adapter::GetFile("ftp://enikifor:student511@nikifor.ucoz.net/img/3_photo.jpg", m_fileName);
+
 }
