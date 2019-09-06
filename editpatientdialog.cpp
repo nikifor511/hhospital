@@ -37,12 +37,28 @@ EditPatientDialog::EditPatientDialog(QWidget *parent,  int id_patient) :
         else
             ui->GenderComboBox->setCurrentIndex(1);
         ui->InsurancePolicyLineEdit->setText(res.value(6).toString());
-
         QUrl url("ftp://nikifor.ucoz.net/img/3_photo.jpg");
         url.setUserName("enikifor");    // Set login
         url.setPassword("student511"); // Set пароль
         url.setPort(21);             // Protocol port, which we will work on
-        QNetworkReply *reply = m_manager->get(QNetworkRequest(url));
+
+
+        QEventLoop loop;
+        connect(m_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        try {
+
+            QNetworkReply *reply = m_manager->get(QNetworkRequest(url));
+             loop.exec();
+            QFile file("d:\out.jpg");
+            file.open(QIODevice::WriteOnly);
+
+            file.write(reply->readAll());
+            delete reply;
+        } catch (...) {
+            return;
+
+        }
+
     }
 }
 
